@@ -9,7 +9,7 @@
         </div>
         <!-- form's div -->
         <div class="panel-body">
-        <form action="<?php echo base_url(); ?>prt/pcs" method="post" target="_blank" autocomplete="off">
+        <form action="<?php echo base_url(); ?>prt/pcs" method="post" target="_blank">
         <?php if($nama!='admin'){ ?>
         <input type="hidden" id="group" value="<?php echo $group; ?>">
         <?php } ?>
@@ -50,7 +50,7 @@
             <label for="vendors">From</label>
             
             <div class="input-group date" data-provide="datepicker">
-                <input type='text' class="form-control" name="from" required="true" id="from"/>
+                <input type='text' class="form-control" name="from" required="true" id="from" autocomplete="off"/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                 </span>
@@ -61,7 +61,7 @@
         <div class="form-group">
             <label for="vendors">To</label>
             <div class="input-group date" data-provide="datepicker">
-                <input type='text' class="form-control" name="to" required="true" id="to"/>
+                <input type='text' class="form-control" name="to" required="true" id="to" autocomplete="off"/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                 </span>
