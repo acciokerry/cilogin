@@ -65,7 +65,7 @@ $(function () {
 
     minMaxDatepicker($('#from'),null);
     minMaxDatepicker($('#to'),null);
-    
+    clearDateField();
   });
 
   function minMaxDatepicker(element, date){
@@ -94,5 +94,11 @@ $(function () {
       });
     });
   }
+
+  function clearDateField() {
+      $('#from').val("");
+      $('#to').val("");
+  }
+
 
 });
