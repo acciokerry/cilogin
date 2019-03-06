@@ -97,10 +97,10 @@ $db['default'] = array(
 
 $db['mssql'] = array(
 	'dsn'	=> '',
-	'hostname' => 'proj',
-	'username' => 'admin',
-	'password' => 'admin',
-	'database' => 'PSADevDWn',
+	'hostname' => 'SQLSRV',
+	'username' => 'codeigniter',
+	'password' => 'codeigniter',
+	'database' => 'PSADevDW',
 	'dbdriver' => 'odbc',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

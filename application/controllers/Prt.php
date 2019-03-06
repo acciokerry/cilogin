@@ -99,10 +99,10 @@ class Prt extends CI_Controller {
 		if($output=='pdf'){
 			//echo base_url().K_PATH_IMAGES."logo_psa.png";
 			$params = [
-				'creator'=>'BISolution',
-				'author'=>'BISolution',
-				'company'=>'BISolution',
-				'company_addr' => "35 Paxtang Street, Hbg, PA",
+				'creator'=>'',
+				'author'=>'',
+				'company'=>'PSA Security Network',
+				'company_addr' => "10170 Church Ranch Way Suite 150, Westminster, CO 80021",
 				'logo'=>base_url().'img/logo_psa.png',
 				'report_title'=>$title,
 				'subject'=>$subject
