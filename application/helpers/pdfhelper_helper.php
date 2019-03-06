@@ -124,7 +124,7 @@ class PDFHelper extends TCPDF{
 					}
 					foreach($this->columnName as $k => $v){
 						if(strpos($v, 'Amount')!== false || strpos($v, 'Total')!== false){ 
-							$html .= '<td align="'.$this->columnAlign[$v].'" width="'.$this->columnSize[$v].'%">'.number_format($value->$v,0).'</td>';
+							$html .= '<td align="'.$this->columnAlign[$v].'" width="'.$this->columnSize[$v].'%">$'.number_format($value->$v,0).'</td>';
 						}else{
 							$html .= '<td align="'.$this->columnAlign[$v].'" width="'.$this->columnSize[$v].'%">'.$value->$v.'</td>';
 						}
