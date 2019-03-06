@@ -45,7 +45,12 @@ class Prt extends CI_Controller {
 	public function pcs(){
 		//$this->checkLogin();
 		if($this->input->post()){
-			$group = $this->session->get_userdata()['groups'];
+			if($this->input->post('groups')!==null){
+				$group = $this->input->post('groups');
+			}else{
+				$group = $this->session->get_userdata()['groups'];
+			}
+			return;
 			$vendor = $this->input->post('vendors');
 			$from = $this->input->post('from');
 			$to = $this->input->post('to');
