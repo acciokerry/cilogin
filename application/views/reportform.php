@@ -17,7 +17,7 @@
         <div class="form-group">
             <label for="type">Report Type</label>
             <select class="form-control" id="type" name="type" required="true" >
-                <!--<option value="">-- Choose report's type --</option>-->
+                <option value="">-- Choose report's type --</option>
                 <?php foreach($report_types as $key => $value){ ?>
                     <option value="<?php echo $value; ?>"><?php echo $key;?></option>
                 <?php } ?>
