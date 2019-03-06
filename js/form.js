@@ -62,8 +62,16 @@ $(function () {
     group = encoding(group);
 
     getVendors(group, this.value);
+
+    minMaxDatepicker($('#from'),null);
+    minMaxDatepicker($('#to'),null);
     
   });
+
+  function minMaxDatepicker(element, date){
+    element.datepicker("option","minDate", date);
+    element.datepicker("option","maxDate", date);
+  }
 
   if(document.getElementById('groups')!=undefined){
     $('#groups').change(function(){
@@ -76,7 +84,7 @@ $(function () {
 
   function getVendors(group, report_type){
     var url = 'http://' + window.location.hostname + '/cilogin/prt/getVendors/' + group + "/" + report_type;
-    console.log(url);
+    //console.log(url);
     $("#vendors").empty()
       .append('<option value="">-- Choose Vendors --</option>')
     // Populate dropdown with list of vendors
