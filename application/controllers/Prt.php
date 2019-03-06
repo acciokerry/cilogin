@@ -13,6 +13,7 @@ class Prt extends CI_Controller {
         $this->load->library('Pdf');
 		$this->load->helper('PDFHelper');
 		$this->load->helper('DateHelper');
+		$this->load->model('admin');
 	}
 
 	public function index()
@@ -24,7 +25,7 @@ class Prt extends CI_Controller {
 	 * function to display report's form
 	 */
 	public function reportform(){
-		$this->checkLogin();
+		//$this->checkLogin();
 		//$vendor = $this->Report->getVendors($param);
 		$data = [
 			'nama' => $this->session->get_userdata()['user_name'],
@@ -42,7 +43,7 @@ class Prt extends CI_Controller {
 	 * function to display report
 	 */
 	public function pcs(){
-		$this->checkLogin();
+		//$this->checkLogin();
 		if($this->input->post()){
 			$group = $this->session->get_userdata()['groups'];
 			$vendor = $this->input->post('vendors');
@@ -61,7 +62,7 @@ class Prt extends CI_Controller {
 	public function print($type, $group, $vendor, $from, $to, $output){
 		//ini_set("memory_limit","64M");
 		// table's data
-		$this->checkLogin();
+		//$this->checkLogin();
 		$rep_start = DateHelper::dateToString($from);
 		$rep_end = DateHelper::dateToString($to);
 		if($type == ReportType::SALES_VENDOR){
@@ -150,7 +151,7 @@ class Prt extends CI_Controller {
 	 * return json
 	 */
 	public function getVendors($groups, $report_type){
-		$this->checkLogin();
+		//$this->checkLogin();
 		$vendor = $this->Report->getVendors($groups, $report_type);
 		return $this->output
 					->set_content_type('application/json')
@@ -158,8 +159,8 @@ class Prt extends CI_Controller {
 	}
 
 	private function checkLogin(){
-		if($this->session->get_userdata()['user_name']==""){
-			//redirect("login");
+		if(!$this->admin->logged_id()){
+			redirect("login");
 		}
 	}
 
