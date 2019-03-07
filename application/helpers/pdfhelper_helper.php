@@ -1,4 +1,5 @@
 <?php
+define("COMPANY_LOGO","logo_psa.png");
 
 class PDFHelper extends TCPDF{
 
@@ -45,9 +46,9 @@ class PDFHelper extends TCPDF{
 	//Page header
     public function Header() {
         // Logo
-        $image_file = K_PATH_IMAGES.'logo_psa.png';
+        $image_file = K_PATH_IMAGES.COMPANY_LOGO;
         $this->Image($image_file, 15, 10, 30, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
-        // Set font
+        // Set company name n addr
         $html = '<table cellspacing="0" cellpadding="1" border="0"><tr><td >'.$this->company_name.'</td></tr><tr><td style="font-size:7px;">'.$this->company_addr.'</td></tr></table>';
      	$this->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
 
@@ -55,7 +56,7 @@ class PDFHelper extends TCPDF{
     }
 
 	public function callHeader(){
-		$this->SetHeaderData("logo_psa.png", PDF_HEADER_LOGO_WIDTH, $this->company_name, $this->company_addr);
+		$this->SetHeaderData(COMPANY_LOGO, PDF_HEADER_LOGO_WIDTH, $this->company_name, $this->company_addr);
 		return $this;
 	}
 
@@ -95,7 +96,10 @@ class PDFHelper extends TCPDF{
 				$this->columnSize[$key] = 100*($value/$size);
 			}
 		}
-		
+		$numData = sizeof($this->tableData);
+		if($numData>0){
+			$ndxNumCol = $this->getColumnIndexContainNumber($this->tableData[0]);
+		}
 		$html='<h3 align="center">'.$this->reportTitle.'</h3>
 				<h4 align="center">'.$this->subject.'</h4>
 				<table cellspacing="1" bgcolor="#666666" cellpadding="2">
@@ -112,6 +116,11 @@ class PDFHelper extends TCPDF{
 		if(sizeof($this->tableData)==0){
 			$html .= '<tr bgcolor="#ffffff"><td colspan="'.sizeof($this->columnSize).'" align="center"> NO DATA </td></tr>';
 		}else{
+			$total = [];
+			$colAmount = 0;
+			foreach($ndxNumCol as $value){
+				$total[$value] = 0;
+			}
 			foreach ($this->tableData as $key => $value) 
 				{
 					$i = 0;
@@ -125,20 +134,58 @@ class PDFHelper extends TCPDF{
 					foreach($this->columnName as $k => $v){
 						if(strpos($v, 'Amount')!== false || strpos($v, 'Total')!== false){ 
 							$html .= '<td align="'.$this->columnAlign[$v].'" width="'.$this->columnSize[$v].'%">$'.number_format($value->$v,0).'</td>';
+							if($colAmount==0){
+								$colAmount = $i;
+							}
 						}else{
 							$html .= '<td align="'.$this->columnAlign[$v].'" width="'.$this->columnSize[$v].'%">'.$value->$v.'</td>';
 						}
-						
+						if(in_array($i, $ndxNumCol)){
+							if(array_key_exists($i,$total)){
+								$total[$i] += $value->$v;
+							}
+						}
 						$i++;
 					}
 							
 					$html .= '</tr>';
 				}
+			if($numData>0){
+				$html .= '<tr bgcolor="#ffffff" nobr="true" style="font-weight:bold;">';
+				$html .= '<th align="center">Total</th>';
+				for($i=1;$i<sizeof($this->columnSize);$i++){
+					if(array_key_exists($i,$total)){
+						$val = number_format($total[$i],0);
+						if($i==$colAmount){
+							$val = '$'.$val;
+						}
+						$html .= '<th align="right">'.$val.'</th>';
+					}else{
+						$html .= '<th ></th>';
+					}
+				}
+				$html .= '</tr>';
+			}
 		}
 		$html .= '</tbody></table>';
 		
 		$this->writeHTML($html);
 		return $this;
+	}
+
+	private function getColumnIndexContainNumber($firstArrayofData){
+		$ret = [];
+		$count = 0;
+		foreach($firstArrayofData as $key => $value){
+			if(is_numeric($value)){
+				if(substr($value,0,1)!='0'){
+					$ret[] = $count++;
+					continue;
+				}
+			}
+			$count++;
+		}
+		return $ret;
 	}
 
 	public function printPdf(){
