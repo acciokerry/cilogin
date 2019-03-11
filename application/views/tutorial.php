@@ -9,11 +9,10 @@
         </div>
         <!-- form's div -->
         <div class="panel-body">
-        <label for="title"><?php echo $title; ?></label>
-        <video width="760" height="580" controls>
-            <source src="<?php echo base_url(); ?>video/<?php echo $video; ?>" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="<?php echo base_url(); ?>video/test.mp4" allowfullscreen></iframe>
+        </div>
+        <label ><?php echo $title; ?></label>
         </div>
         <!-- end of form's div -->
     </div>
