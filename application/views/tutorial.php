@@ -10,7 +10,7 @@
         <!-- form's div -->
         <div class="panel-body">
         <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="<?php echo base_url(); ?>video/test.mp4" allowfullscreen></iframe>
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/PnqxdEm1j4A" allowfullscreen></iframe>
         </div>
         <label ><?php echo $title; ?></label>
         </div>
