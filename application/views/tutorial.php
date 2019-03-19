@@ -10,9 +10,8 @@
         <!-- form's div -->
         <div class="panel-body">
         <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/PnqxdEm1j4A" allowfullscreen></iframe>
+            <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/321356132" allowfullscreen></iframe>
         </div>
-        <label ><?php echo $title; ?></label>
         </div>
         <!-- end of form's div -->
     </div>
