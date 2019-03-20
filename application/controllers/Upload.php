@@ -18,10 +18,13 @@ class Upload extends CI_Controller{
 
     public function do_upload(){
         $config['upload_path']          = './uploads/';
-        $config['allowed_types']        = 'pdf';
+        $config['allowed_types']        = 'xls|xlsx';
         $config['max_size']             = 10000;
 
-        $name = $this->session->get_userdata()['groups'].'_'.time().'.pdf';
+        $filename = $_FILES['fupload']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+
+        $name = $this->session->get_userdata()['groups'].'_'.time().'.'.$ext;
 
         $config['file_name']            = $name;
 
