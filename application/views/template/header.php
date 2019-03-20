@@ -52,5 +52,6 @@
 			  <a href="<?php echo base_url(); ?>dashboard" class="list-group-item"><i class="fa fa-dashboard"></i> Dashboard</a>
 				<a href="<?php echo base_url(); ?>prt/reportform" class="list-group-item"><i class="fa fa-line-chart"></i> Report</a>
 				<a href="<?php echo base_url(); ?>tutorial" class="list-group-item"><i class="fa fa-file-video-o"></i> Tutorial</a>
+				<a href="<?php echo base_url(); ?>upload" class="list-group-item"><i class="fa fa-upload"></i> Upload</a>
 			</div>
 		</div>
