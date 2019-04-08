@@ -98,7 +98,8 @@ class PDFHelper extends TCPDF{
 		}
 		$numData = sizeof($this->tableData);
 		if($numData>0){
-			$ndxNumCol = $this->getColumnIndexContainNumber($this->tableData[0]);
+			//$ndxNumCol = $this->getColumnIndexContainNumber($this->tableData[0]);
+			$ndxNumCol = $this->getColumnNameIndexContainNumber($this->columnName);
 		}
 		$html='<h3 align="center">'.$this->reportTitle.'</h3>
 				<h4 align="center">'.$this->subject.'</h4>
@@ -185,6 +186,23 @@ class PDFHelper extends TCPDF{
 			}
 			$count++;
 		}
+		return $ret;
+	}
+
+	private function getColumnNameIndexContainNumber($columnName){
+		$ret = [];
+		$count = 0;
+		foreach($columnName as $key=>$value){
+			if(strpos($value,"Amount")!==false 
+				|| strpos($value,"Total")!==false
+				|| strpos($value,"Quantity")!==false
+				|| strpos($value,"Count")!==false){
+				$ret[] = $count++;
+				continue;
+			}
+			$count++;
+		}
+
 		return $ret;
 	}
 

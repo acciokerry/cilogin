@@ -11,14 +11,14 @@ $(function () {
       .on("change", function () {
         var type = $('#type').val();
         to.datepicker("option", "minDate", getDate(this));
-        if (type == 3 || type == '3') { // +1m after it's minDate if report's type = shipment tracking
+        //if (type == 3 || type == '3') { // +1m after it's minDate if report's type = shipment tracking
           var s = this.value.split("/");
           var d = new Date(s[2], s[0], s[1]);
           d.setMonth(d.getMonth());
           to.datepicker("option", "maxDate", d);
-        } else { // other than shipment tracking
-          to.datepicker("option", "maxDate", null);
-        }
+        //} else { // other than shipment tracking
+        //  to.datepicker("option", "maxDate", null);
+        //}
       }),
     to = $("#to").datepicker({
       showMeridian: true,
@@ -31,14 +31,14 @@ $(function () {
       .on("change", function () {
         var type = $('#type').val();
         from.datepicker("option", "maxDate", getDate(this));
-        if (type == 3 || type == '3') { // -1m after it's minDate if report's type = shipment tracking
+        //if (type == 3 || type == '3') { // -1m after it's minDate if report's type = shipment tracking
           var s = this.value.split("/");
           var d = new Date(s[2], s[0], s[1]);
           d.setMonth(d.getMonth() - 2);
           from.datepicker("option", "minDate", d);
-        } else { // other than shipment tracking
-          from.datepicker("option", "minDate", null);
-        }
+        //} else { // other than shipment tracking
+        //  from.datepicker("option", "minDate", null);
+        //}
       });
 
   function getDate(element) {
@@ -88,16 +88,20 @@ $(function () {
 
     $("#vendors").empty()
       .append('<option value="">-- Choose Vendors --</option>');
+      
     if (report_type >= 1) {
       var url = 'http://' + window.location.hostname + '/cilogin/prt/getVendors/' + group + "/" + report_type;
-      //console.log(url);
+      // console.log(url);
       // Populate dropdown with list of vendors
+      if(report_type != 3){
+        $("#vendors").append('<option value="0">ALL VENDORS</option>');
+      }
       $.getJSON(url, function (data) {
         $.each(data, function (key, entry) {
           $("#vendors").append($('<option></option>').attr('value', entry.Vendors_SK).text(entry.Vendor_Name));
         });
       });
-    }
+    } // else do nothing
   }
 
   function clearDateField() {
