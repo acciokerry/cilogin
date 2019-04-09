@@ -25,7 +25,7 @@ class Prt extends CI_Controller {
 	 * function to display report's form
 	 */
 	public function reportform(){
-		//$this->checkLogin();
+		$this->checkLogin();
 		//$vendor = $this->Report->getVendors($param);
 		$data = [
 			'nama' => $this->session->get_userdata()['user_name'],
@@ -43,7 +43,7 @@ class Prt extends CI_Controller {
 	 * function to display report
 	 */
 	public function pcs(){
-		//$this->checkLogin();
+		$this->checkLogin();
 		if($this->input->post()){
 			if($this->input->post('groups')!==null){
 				$group = $this->input->post('groups');
@@ -68,7 +68,7 @@ class Prt extends CI_Controller {
 	public function print($type, $group, $vendor, $from, $to, $output){
 		//ini_set("memory_limit","64M");
 		// table's data
-		//$this->checkLogin();
+		$this->checkLogin();
 		$rep_start = DateHelper::dateToString($from);
 		$rep_end = DateHelper::dateToString($to);
 		if($type == ReportType::SALES_VENDOR){
@@ -102,7 +102,7 @@ class Prt extends CI_Controller {
 			$dataParams = $this->Report->getReturnColumnHeader();
 			$tableStyle = $this->Report->getReturnColumnStyle();
 		}
-
+		
 		if($output=='pdf'){
 			//echo base_url().K_PATH_IMAGES."logo_psa.png";
 			$params = [

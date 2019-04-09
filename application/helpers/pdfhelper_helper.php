@@ -34,7 +34,7 @@ class PDFHelper extends TCPDF{
 	}
 
 	public function setTableData($data=array(), $columnsName=array(), $tableData=array()){
-
+		
 		$this->columnName = $columnsName;
 		$this->numOfColumns = sizeof($columnsName);
 		$this->tableData = $data;
@@ -78,6 +78,7 @@ class PDFHelper extends TCPDF{
 	}
 
 	public function callTableHtml($columnsWidth=null){
+		
 		$this->addPage();
 		if(null==$this->columnSize || sizeof($this->columnSize)!=sizeof($this->columnName)){
 			$size = 100/sizeof($this->columnName);
@@ -139,7 +140,7 @@ class PDFHelper extends TCPDF{
 								$colAmount = $i;
 							}
 						}else{
-							$html .= '<td align="'.$this->columnAlign[$v].'" width="'.$this->columnSize[$v].'%">'.$value->$v.'</td>';
+							$html .= '<td align="'.$this->columnAlign[$v].'" width="'.$this->columnSize[$v].'%">'.utf8_encode($value->$v).'</td>';
 						}
 						if(in_array($i, $ndxNumCol)){
 							if(array_key_exists($i,$total)){
@@ -169,7 +170,7 @@ class PDFHelper extends TCPDF{
 			}
 		}
 		$html .= '</tbody></table>';
-		
+		//echo $html;
 		$this->writeHTML($html);
 		return $this;
 	}
