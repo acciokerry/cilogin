@@ -51,6 +51,7 @@ class Login extends CI_Controller {
 		                        'user_name' => $apps->username,
 		                        'user_pass' => $apps->password,
 		                        'groups' => $apps->groups,
+		                        'role'	=> $apps->role, 
 		                        'power_bi'  => $apps->powerbi
 		                    );
 		                    //set session userdata

@@ -8,7 +8,7 @@ class Report extends CI_Model{
 	const RIGHT = 'right';
 	const CENTER = 'center';
 	const JUSTIFY = 'justify';
-	const VENDOR_ALL = 0;
+	const VENDOR_ALL = "0";
 	
 	function __construct(){
 		// create database instance
@@ -42,14 +42,13 @@ class Report extends CI_Model{
 			ON DimItems.Item_SK = FactSales.Item_SK
 			INNER JOIN DimCustomers
 			ON DimCustomers.Customer_SK = FactSales.Customer_SK
-			WHERE Customer_Group = '".$group."'";
+			WHERE Customer_Group = '".$group."'"; //nanti yg diutak atik
 		if($vendor != $this::VENDOR_ALL){
 			$q .= " AND FactSales.Vendors_SK = '".$vendor."'"; 
 		}
 		$q .= " AND DimDate.Date BETWEEN ('".$from."') AND ('".$to."') ORDER BY DimDate.Date";
-			//echo $q;
+			 //echo $q;
 		$query = $this->datadb->query($q); 
-		//echo $q;
 		$result = $query->result();
 		
 		return $result;

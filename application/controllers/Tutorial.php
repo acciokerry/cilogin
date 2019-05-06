@@ -8,13 +8,15 @@ class Tutorial extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('admin');
+        $this->load->helper('Role');
     }
 
     public function index(){
         $this->checkLogin();
         $data = [
             'video' => 'test.mp4',
-            'title' => 'Tutorial PDF'
+            'title' => 'Tutorial PDF',
+            'role' => Role::getRoles($this->session->get_userdata()['role'])
         ];
         $this->load->view('tutorial', $data);
     }

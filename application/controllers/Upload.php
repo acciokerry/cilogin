@@ -8,11 +8,13 @@ class Upload extends CI_Controller{
     {
         parent::__construct();
         $this->load->model("admin");
+        $this->load->helper('Role');
     }
 
     public function index(){
         $this->checkLogin();
-        $params = ["error"=>""];
+        $params = ["error"=>"",
+                    'role' => Role::getRoles($this->session->get_userdata()['role'])];
         $this->load->view("upload",$params);
     }
 
@@ -38,7 +40,8 @@ class Upload extends CI_Controller{
         }
         else
         {
-                $data = array('error' => '<h4 style="color:green">Your file was successfully uploaded!</h4>');
+                $data = array('error' => '<h4 style="color:green">Your file was successfully uploaded!</h4>',
+                            'role' => Role::getRoles($this->session->get_userdata()['role']));
 
                 $this->load->view('upload', $data);
         }

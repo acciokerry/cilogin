@@ -14,6 +14,7 @@ class Prt extends CI_Controller {
 		$this->load->helper('PDFHelper');
 		$this->load->helper('DateHelper');
 		$this->load->model('admin');
+		$this->load->helper('Role');
 	}
 
 	public function index()
@@ -30,7 +31,8 @@ class Prt extends CI_Controller {
 		$data = [
 			'nama' => $this->session->get_userdata()['user_name'],
 			'group' => $this->session->get_userdata()['groups'],
-			'report_types' 	=> Report::getReportType() 
+			'report_types' 	=> Report::getReportType(),
+			'role' => Role::getRoles($this->session->get_userdata()['role']) 
 		];
 		if($data['nama']=='admin'){
 			$data['groups'] = $this->Report->getAllGroups();
@@ -46,6 +48,7 @@ class Prt extends CI_Controller {
 		$this->checkLogin();
 		if($this->input->post()){
 			if($this->input->post('groups')!==null){
+			//if(isset($this->input->post('groups'))){
 				$group = $this->input->post('groups');
 			}else{
 				$group = $this->session->get_userdata()['groups'];

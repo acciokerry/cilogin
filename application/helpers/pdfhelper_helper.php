@@ -127,10 +127,10 @@ class PDFHelper extends TCPDF{
 				{
 					$i = 0;
 					if($fill){
-						$html.='<tr bgcolor="#b2bec3" nobr="true">';//$color = "#dfe6e9";
+						$html.='<tr bgcolor="#dae2e8" nobr="true">';//$color = "#dfe6e9";
 						$fill = false;
 					}else{
-						$html.='<tr bgcolor="#ffffff" nobr="true">';//$color = "#ffffff";
+						$html.='<tr bgcolor="#f9f9f9" nobr="true">';//$color = "#ffffff";
 						$fill = true;
 					}
 					foreach($this->columnName as $k => $v){
@@ -144,7 +144,7 @@ class PDFHelper extends TCPDF{
 						}
 						if(in_array($i, $ndxNumCol)){
 							if(array_key_exists($i,$total)){
-								$total[$i] += $value->$v;
+								$total[$i] += round($value->$v);
 							}
 						}
 						$i++;

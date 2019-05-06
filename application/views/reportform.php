@@ -24,7 +24,7 @@
             </select>
         </div>
         <!-- end of report's type -->
-        <?php if($nama=='admin'){ ?>
+        <?php if($role['admin']){ ?>
         <!-- groups -->
         <div class="form-group">
             <label for="groups">Integrators</label>
@@ -37,6 +37,7 @@
         </div>
         <!-- end of groups -->
         <?php } ?>
+        <?php if(!$role['customer']){ ?>
         <!-- vendors -->
         <div class="form-group">
             <label for="vendors">Vendors</label>
@@ -45,6 +46,7 @@
             </select>
         </div>
         <!-- end of vendors -->
+        <?php } ?>
         <!-- start date -->
         <div class="form-group">
             <label for="vendors">From</label>
