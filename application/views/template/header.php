@@ -4,21 +4,14 @@
 <html>
 <head>
 	<title> PSA Integrator Visualization</title>
-	<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
-         rel = "stylesheet">
+	<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/font-awesome.min.css">
 	<link href="<?php echo base_url(); ?>css/prettify.css" rel="stylesheet">
-	<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap-datepicker3.css"/>
-	<link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap-datepicker3.standalone.min.css"/>-->
-	<!--<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
-	<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!--<script type="text/javascript" src="<?php echo base_url();?>js/bootstrap-datepicker.min.js"></script>-->
-	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>-->
 	<link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
 	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -50,7 +43,9 @@
 			    Welcome, <?php echo $this->session->userdata("user_nama") ?>
 			  </a>
 			  <a href="<?php echo base_url(); ?>dashboard" class="list-group-item"><i class="fa fa-dashboard"></i> Dashboard</a>
+				<?php if(!$role['vendor']){ ?>
 				<a href="<?php echo base_url(); ?>prt/reportform" class="list-group-item"><i class="fa fa-line-chart"></i> Report</a>
+			<?php } ?>
 				<a href="<?php echo base_url(); ?>tutorial" class="list-group-item"><i class="fa fa-file-video-o"></i> Tutorial</a>
 				<a href="<?php echo base_url(); ?>upload" class="list-group-item"><i class="fa fa-upload"></i> Upload</a>
 			</div>

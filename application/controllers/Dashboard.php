@@ -8,13 +8,16 @@ class Dashboard extends CI_Controller {
         parent::__construct();
         //load model admin
         $this->load->model('admin');
+        $this->load->helper('Role');
     }
 
 	public function index()
 	{
 		if($this->admin->logged_id())
 		{
-			$this->load->view("dashboard");			
+			$data = ['role' => Role::getRoles($this->session->get_userdata()['role'])];
+			
+			$this->load->view("dashboard", $data);			
 
 		}else{
 			//jika session belum terdaftar, maka redirect ke halaman login
