@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-class Prt extends CI_Controller {
+class Prt extends MY_Controller {
 
     public function __construct()
     {
@@ -13,28 +13,25 @@ class Prt extends CI_Controller {
         $this->load->library('Pdf');
 		$this->load->helper('PDFHelper');
 		$this->load->helper('DateHelper');
-		$this->load->model('admin');
-		$this->load->helper('Role');
 	}
 
 	public function index()
 	{
-		$this->checkLogin();
+
 	}
 
 	/**
 	 * function to display report's form
 	 */
 	public function reportform(){
-		$this->checkLogin();
-		//$vendor = $this->Report->getVendors($param);
 		$data = [
 			'nama' => $this->session->get_userdata()['user_name'],
 			'group' => $this->session->get_userdata()['groups'],
 			'report_types' 	=> Report::getReportType(),
-			'role' => Role::getRoles($this->session->get_userdata()['role']) 
+			'role' => $this->role
 		];
-		if($data['nama']=='admin'){
+
+		if($data['role']['admin']){
 			$data['groups'] = $this->Report->getAllGroups();
 		}
 		
@@ -45,7 +42,6 @@ class Prt extends CI_Controller {
 	 * function to display report
 	 */
 	public function pcs(){
-		$this->checkLogin();
 		if($this->input->post()){
 			if($this->input->post('groups')!==null){
 			//if(isset($this->input->post('groups'))){
@@ -53,8 +49,6 @@ class Prt extends CI_Controller {
 			}else{
 				$group = $this->session->get_userdata()['groups'];
 			}
-			// return;
-			//$group = $this->session->get_userdata()['groups'];
 			$vendor = $this->input->post('vendors');
 			$from = $this->input->post('from');
 			$to = $this->input->post('to');
@@ -107,7 +101,6 @@ class Prt extends CI_Controller {
 		}
 		
 		if($output=='pdf'){
-			//echo base_url().K_PATH_IMAGES."logo_psa.png";
 			$params = [
 				'creator'=>'',
 				'author'=>'',
@@ -140,7 +133,6 @@ class Prt extends CI_Controller {
 			$activeSheet->getStyle("A1")->getFont()->setSize(16);
 			
 			//output headers
-			//$activeSheet->fromArray(array_keys($data[0]), NULL, 'A3');
 			$activeSheet->fromArray(array_keys($dataParams), NULL, 'A3');
 			//output values
 			$activeSheet->fromArray($data, NULL, 'A4');
@@ -160,23 +152,10 @@ class Prt extends CI_Controller {
 	 * return json
 	 */
 	public function getVendors($groups, $report_type){
-		//$this->checkLogin();
 		$vendor = $this->Report->getVendors($groups, $report_type);
 		return $this->output
 					->set_content_type('application/json')
 					->set_output(json_encode($vendor));
-	}
-
-	private function checkLogin(){
-		if(!$this->admin->logged_id()){
-			redirect("login");
-		}
-	}
-
-	public function logout()
-	{
-		$this->session->sess_destroy();
-		redirect('login');
 	}
 
 }

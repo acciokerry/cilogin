@@ -2,19 +2,16 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Upload extends CI_Controller{
+class Upload extends MY_Controller{
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("admin");
-        $this->load->helper('Role');
     }
 
     public function index(){
-        $this->checkLogin();
         $params = ["error"=>"",
-                    'role' => Role::getRoles($this->session->get_userdata()['role'])];
+                    'role' => $this->role];
         $this->load->view("upload",$params);
     }
 
@@ -34,22 +31,17 @@ class Upload extends CI_Controller{
 
         if ( ! $this->upload->do_upload('fupload'))
         {
-                $error = array('error' => '<h4 style="color:red">'.$this->upload->display_errors().'</h4>');
+                $error = array('error' => '<h4 style="color:red">'.$this->upload->display_errors().'</h4>',
+                                'role' => $this->role);
 
                 $this->load->view('upload', $error);
         }
         else
         {
                 $data = array('error' => '<h4 style="color:green">Your file was successfully uploaded!</h4>',
-                            'role' => Role::getRoles($this->session->get_userdata()['role']));
+                            'role' => $this->role);
 
                 $this->load->view('upload', $data);
         }
     }
-
-    private function checkLogin(){
-		if(!$this->admin->logged_id()){
-			redirect("login");
-		}
-	}
 }

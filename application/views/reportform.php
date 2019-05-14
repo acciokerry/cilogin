@@ -10,7 +10,7 @@
         <!-- form's div -->
         <div class="panel-body">
         <form action="<?php echo base_url(); ?>prt/pcs" method="post" target="_blank">
-        <?php if($nama!='admin'){ ?>
+        <?php if(!$role['admin']){?>
         <input type="hidden" id="group" value="<?php echo $group; ?>">
         <?php } ?>
         <!-- report's types -->
