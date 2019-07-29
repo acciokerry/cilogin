@@ -100,7 +100,9 @@ $(function () {
         $.each(data, function (key, entry) {
           $("#vendors").append($('<option></option>').attr('value', entry.Vendors_SK).text(entry.Vendor_Name));
         });
+        $('#vendors').chosen({no_results_text: "Oops, nothing found!"});  
       });
+
     } // else do nothing
   }
 

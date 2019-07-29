@@ -28,7 +28,7 @@
         <!-- groups -->
         <div class="form-group">
             <label for="groups">Integrators</label>
-            <select class="form-control" id="groups" name="groups" required="true" >
+            <select class="form-control chosen-select" id="groups" name="groups" required="true" >
                 <!--<option value="">-- Choose groups' name --</option>-->
                 <?php foreach($groups as $key => $value){ ?>
                     <option value="<?php echo $value->Customer_Group; ?>"><?php echo $value->Customer_Group;?></option>
@@ -90,6 +90,7 @@
         <!-- end of form's div -->
     </div>
 </div>
+
 <script type="text/javascript" src="<?php echo base_url();?>js/encoding.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/form.js"></script>
 <?php
